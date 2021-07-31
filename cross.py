@@ -2,7 +2,7 @@
 """
 Created on Thu Jun  4 19:05:57 2020
 
-@author: derich
+@author: krunal
 """
 
 # %reset -f
