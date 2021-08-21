@@ -41,7 +41,7 @@ while True:
      print("FLAME",Value[0],"GAS"[1])
      
      if (FLAME > 20000) and (1800<GAS<3000)
-         print("GreenLEDpin will on",FLAME;GAS)
+         print("GreenLEDpin will on")
          GPIO.output(GreenLEDpin,True)
          sleep(1)
          GPIO.output(RedLEDpin,False)
