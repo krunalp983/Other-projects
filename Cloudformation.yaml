@@ -1,0 +1,77 @@
+Description: >
+    This template is design to deploy EC2 instances in AWS environment.
+Parameters:
+    EnvironmentName:
+        Description: An environment name that will be prefixed to resource names
+        Type: String
+        Default: PROD
+
+    VpcId:
+        Description: VPC ID for resoures
+        #system manager paramter         
+        Type: AWS::SSM::Parameter::Value<AWS::EC2::VPC>       
+        Default: VpcID
+        
+
+    KeyName:
+        Description: Name of an existing EC2 Keypair to enable RDP access to the instances
+        Type: Type: AWS::SSM::Parameter::Value<AWS::EC2::keypair::KeyName>
+        Constrain Description: must be name of the existing keypair
+        Default: Keyname
+
+    InstanceType:
+        Description: APP EC2 instance type
+        Type: AWS::SSM::Parameter::Value<String>
+        Default: instance type
+        
+
+    SubnetID:
+        Description: App EC2 instance type
+        Type : AWS::SSM::Parameter::Value<AWS::EC2::Subnet>
+        Default: SubnetID
+        
+    ImageID:
+        Description: App EC2 instance type
+        Type : AWS::SSM::Parameter::Value<AWS::EC2::Image::ID>
+        Default: SubnetID
+
+Resources:
+    EC2Instance1:
+        Type: AWS::EC2::Instance
+        Properties:
+            InstanceType: 
+              Ref: InstanceType
+            KeyName:
+              Ref: KeyName
+            DisableApiTermination: true
+            ImageID: !Ref ImageID
+            SubnetId: !Ref SubnetID
+            SecurityGroups:
+               -sg-03bda8262db141e79
+            BlockDeviceMappings:
+             -
+              DeviceName:  /dev/sda1
+              Ebs:
+                VolumeSize: 80
+             -
+               DeviceName:  /dev/sda1
+              Ebs:
+                VolumeSize: 80
+             Tags:
+              -Key: Product
+               Value: test
+              -Key: Type
+               Value: Appserver
+             UserData:
+              'Fn:Base64': !Sub |
+                  <powershell>
+                  import-module AWSpowershell
+                  #specify rrot directory
+                  
+                  
+             
+      
+
+
+   
+           
