@@ -1,0 +1,10 @@
+pipeline {
+    agent any
+    stages {
+        stages('submit stack') {
+            steps {
+            sh "aws cloudformation create--stack--stack-namen ecinstance10 --template-body file://ec2.yaml -- tags key=name,value=123 region 'eu-central-1'"
+            }
+           }
+          }
+         } 
